@@ -19,35 +19,42 @@ def choose_random_number():
     return number
 
 
-def choose_skill_level(number):
+def choose_skill_level():
     skill_level = input("Would you like to play 'easy' or 'hard'? ")
     skill_level = skill_level.lower()
     if skill_level == "easy":
-        easy(number)
-    # elif skill_level == "hard":
-    #     hard()
+        total_guesses = 10
+        return total_guesses
+
+    elif skill_level == "hard":
+        total_guesses = 5
+        return total_guesses
     else:
         print("I'm sorry, I don't recognize that choice. Please start over")
+        
 
 
-def easy(number):
-    # global number
-    total_guesses = 10
-    print("You have 10 guesses, choose wisely")
+def game(number,total_guesses):
+    print(f"You have {total_guesses} guesses, choose wisely")
     while total_guesses != 0:
-        guess = int(input("What is your guess? "))
         print(f"You have {total_guesses} guesses left ")
-        if total_guesses == 0:
-            print(f"I'm sorry, you ran out of guesses. The number was {number}.")
-        elif guess == number:
+        guess = int(input("What is your guess? "))
+        # if total_guesses == 0:
+        #     print(f"I'm sorry, you ran out of guesses. The number was {number}.")
+        if guess == number:
             print(f"That's correct! The number was {number}. Thank you for playing")
             break
         elif guess > number:
-            print("That's too high, guess again")
+            print("That's too high")
             total_guesses -= 1
+            if total_guesses == 0:
+                print(f"I'm sorry, you ran out of guesses. The number was {number}.")
+
         elif guess < number:
-            print("That's too low, guess again")
+            print("That's too low")
             total_guesses -= 1
+            if total_guesses == 0:
+                print(f"I'm sorry, you ran out of guesses. The number was {number}.")
 
 
 
@@ -55,6 +62,9 @@ def easy(number):
 # def hard():
 
 def run_game():
+    
     number = choose_random_number()
-    choose_skill_level(number)
+    total_guesses = choose_skill_level()
+    game(number,total_guesses)
+
 run_game()
