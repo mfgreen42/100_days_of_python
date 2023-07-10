@@ -56,34 +56,54 @@ def compare_entries(entry_a, entry_b):
     user_choice = input("Who has more followers?: A or B ")
     user_choice = user_choice.upper()
     if user_choice == "A":
-        user_choice == entry_a
+        user_choice = entry_a
     elif user_choice == "B":
         user_choice = entry_b 
     return winning_entry, user_choice
 
-def pick_winner(winning_entry, user_choice, entry_a, entry_b):
+def pick_winner(winning_entry, user_choice):
     global compare_again
+    global correct
+    global entry_a
     if user_choice == winning_entry:
         print("That is correct!")
         entry_a = winning_entry
+        correct += 1
+        print(f"You have {correct} correct so far")
         return entry_a
     else:
         print("I'm sorry, that is incorrect")
+        print(f"You got {correct} correct")
         compare_again = False
 
-# def second_round():
-
+def getting_entry_b(entry_a):
+    global entry_b
+    entry_b = random.choice(data)
+    if entry_b == entry_a:
+        entry_b = random.choice(data)
+    else:
+        return entry_b
     
+def second_round(winning_entry, user_choice, entry_a, entry_b):
+    getting_entry_b(entry_a)
+    print_entries(entry_a, entry_b)
+    compare_entries(entry_a, entry_b)
+    pick_winner(winning_entry, user_choice)
 
 
 def game_play():
-    draw_entries()
-    print_entries(entry_a, entry_b)
-    while compare_again:
-        compare_entries(entry_a, entry_b)
-        pick_winner(winning_entry, user_choice, entry_a, entry_b)
+        draw_entries()
+        while compare_again:
+            print_entries(entry_a, entry_b)
+            compare_entries(entry_a, entry_b)
+            pick_winner(winning_entry, user_choice)
+            if compare_again == True:
+                second_round(winning_entry, user_choice, entry_a, entry_b)
+                # getting_entry_b(entry_a)
+            else:
+                print("Thank you for playing, better luck next time")
+        
 
-    play_again()
 game_play()
 
 
