@@ -2,25 +2,6 @@ import random
 from art import logo, vs
 from game_data import data
 
-
-#get random entry A from game data
-
-#print entry A with key value pairs
-
-#get a second random entry B from game data, make sure it's different from the first
-
-#compare entry A and entry B, what has the highest follower count? entry A or B.. make all answers uppercase to mitigate errors
-
-#if correct change entry A to correct answer
-
-#get a random entry B from game data
-
-#compare to entry 1
-
-#if incorrect end game, display number of correct answers. 
-
-#ask if user would like to play again?
-
 print(logo)
 
 
@@ -84,24 +65,24 @@ def getting_entry_b(entry_a):
     else:
         return entry_b
     
-def second_round(winning_entry, user_choice, entry_a, entry_b):
-    getting_entry_b(entry_a)
-    print_entries(entry_a, entry_b)
-    compare_entries(entry_a, entry_b)
-    pick_winner(winning_entry, user_choice)
+def second_round(winning_entry, entry_a):
+    while compare_again:
+        getting_entry_b(entry_a)
+        print_entries(entry_a, entry_b)
+        compare_entries(entry_a, entry_b)
+        pick_winner(winning_entry, user_choice)
 
 
 def game_play():
         draw_entries()
-        while compare_again:
-            print_entries(entry_a, entry_b)
-            compare_entries(entry_a, entry_b)
-            pick_winner(winning_entry, user_choice)
-            if compare_again == True:
-                second_round(winning_entry, user_choice, entry_a, entry_b)
-                # getting_entry_b(entry_a)
-            else:
-                print("Thank you for playing, better luck next time")
+        print_entries(entry_a, entry_b)
+        # while compare_again:
+        compare_entries(entry_a, entry_b)
+        pick_winner(winning_entry, user_choice)
+        if compare_again == True:
+            second_round(winning_entry, entry_a)
+        else:
+            print("Thank you for playing, better luck next time")
         
 
 game_play()
